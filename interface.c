@@ -21,3 +21,17 @@ void show_board(COORDINATE c) {
 
 
 
+int interpreter (STATE *e) {
+    char line [BUF_SIZE];
+    char col[2], lin[2];
+    if (fgets(line, BUF_SIZE, stdin) == NULL)
+        return 0;
+    //Se a jogada for valida
+    if (strlen(line) == 3 && sscanf(line, "%[a-h]%[1-8]", col, lin) == 2) {
+        COORDINATE coord = {*col - 'a', *lin - '1'};
+        play(e, coord);
+        show_board(coord);
+    } else printf("Invalid move!\n");
+
+    return 1;
+}
